@@ -1,0 +1,60 @@
+<!-- This code can be run in vscode with 'open with live server' -->
+<head>
+  <style> body { margin: 0; } </style>
+
+  <script src="//unpkg.com/3d-force-graph"></script>
+  <!--<script src="../../dist/3d-force-graph.js"></script>-->
+</head>
+
+<body>
+  <div id="3d-graph"></div>
+
+  <script>
+   const addresses = {
+    "Generatorvej 21": [55.72993, 12.4648], 
+    "Lille Veksøvej 11": [55.757949, 12.228728], 
+    "Lautrupvang 1": [55.733204, 12.391164], 
+    "Novo Alle 1": [55.754555, 12.455185], 
+    "Sundkrogsgade 4": [55.708655, 12.591288], 
+    "Borupvang 4": [55.734142, 12.380579], 
+    "Lautrupparken 40": [55.73613, 12.393105], 
+    "Wildersgade 51": [55.674321, 12.591612], 
+    "Gothersgade 14": [55.682038, 12.583964], 
+    "Suderbovej 22-24": [57.4455297, 10.4937435],
+    "Teglholmsgade 1": [55.653577, 12.544796], 
+    "Grønningen 17": [54.788356, 11.688986],
+    "Dynamovej 11": [55.730673, 12.463418], 
+    "Købmagergade 11": [55.679721, 12.579087], 
+    "Holmbladsgade 133": [55.667802, 12.618812], 
+    "Brøndby Stadion 30": [55.649056, 12.417581], 
+    "Overgaden Neden Vandet 9A": [55.672023, 12.588964], 
+    "Skovmarken 3B": [55.789076, 12.540873], 
+    "Bryggeristræde 2": [55.274825, 14.800772], 
+    "Gråbrødrepassagen 9": [55.395903, 10.384222], 
+    "Gearhalsvej 1": [55.660184, 12.514151], 
+    "Tangen 6": [58.9274614, 11.6516802], 
+    "Trollesmindealle 25": [55.924279, 12.283561], 
+    "Jagtvej 157": [55.702334, 12.557268], 
+    "Ryesgade 74": [55.694991, 12.571624]
+}
+    
+    const nodes = Object.keys(addresses).map((address, i) => ({
+      id: i,
+      address,
+      lat: addresses[address][0],
+      lon: addresses[address][1],
+    }));
+    
+    const links = [];
+    nodes.forEach((_, i) => {
+      const target = Math.round(Math.random() * (i - 1));
+      links.push({ source: i, target });
+    });
+    
+    const gData = { nodes, links };
+    
+    const Graph = ForceGraph3D()
+      (document.getElementById('3d-graph'))
+      .graphData(gData);
+  </script>
+</body>
